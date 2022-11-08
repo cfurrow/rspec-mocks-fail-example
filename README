@@ -1,6 +1,0 @@
-# rspec-mocks failure example
-Related to https://github.com/rspec/rspec-mocks/issues/1499
-
-Upgrading from rspec-mocks v3.11.1 to v3.11.2 or v3.12.0 seems to cause some issues with the `receive` matcher (or related).
-
-You'll see in spec/lib/analytics_service_spec.rb there are two examples. They do very similar things, but one will always fail when not using the `.receive()` block form. When we call `.receive(...).with(...)` it will always fail. But replacing that with `.receive(...) do |arg|` will make it pass.
