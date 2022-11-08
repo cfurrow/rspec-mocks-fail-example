@@ -19,7 +19,8 @@ RSpec.describe AnalyticsService do
         hubspot_contact_id: 'abc-123'
       }
     end
-    it do
+
+    it 'does not fail when I use .receive().with()' do
       expect(described_class.tracker).to receive(:track).with(
           user_id: user.id,
           event: event,
@@ -27,6 +28,21 @@ RSpec.describe AnalyticsService do
           timestamp: timestamp,
           anonymous_id: nil
         )
+      described_class.track(user: user, event: event, properties: properties.merge(common_event_properties), timestamp: timestamp)
+    end
+
+    it 'does not fail when I use .receive() block-form' do
+      expect(described_class.tracker).to receive(:track) do |args|
+          expected_args = {
+            user_id: user.id,
+            event: event,
+            properties: properties.merge(common_event_properties),
+            timestamp: timestamp,
+            anonymous_id: nil
+        }
+
+        expect(args).to match(expected_args)
+      end
       described_class.track(user: user, event: event, properties: properties.merge(common_event_properties), timestamp: timestamp)
     end
   end
