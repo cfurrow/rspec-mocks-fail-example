@@ -1,0 +1,5 @@
+# rspec-mocks failure example
+Related to https://github.com/rspec/rspec-mocks/issues/1499
+
+Upgrading from rspec-mocks v3.11.1 to v3.11.2 or v3.12.0 seems to cause some issues with the `receive` matcher (or related).
+
